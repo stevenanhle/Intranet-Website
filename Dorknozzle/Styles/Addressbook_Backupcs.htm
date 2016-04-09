@@ -1,0 +1,90 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Dorknozzle.master" AutoEventWireup="true" CodeBehind="AddressBook.aspx.cs" Inherits="Dorknozzle.AddressBook" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoder1" runat="server">
+<h1>Address Book</h1>
+<asp:GridView ID="grid" runat="server" AutoGenerateColumns="false"
+        onselectedindexchanged="grid_SelectedIndexChanged" >
+    <Columns>
+
+        <asp:BoundField DataField="Name" HeaderText="Name" />
+        <asp:BoundField DataField="Username" HeaderText="Username" />
+        <asp:BoundField DataField ="Telephone" HeaderText="Telephone" />
+        <asp:BoundField DataField ="City" HeaderText="City" />
+        <asp:BoundField DataField="State" HeaderText="State" />
+        <asp:ButtonField CommandName="Select" Text="Select" />
+   
+   
+    </Columns>
+    </asp:GridView><br />
+
+
+    <asp:Label ID="detailsLabel" runat="server" />
+
+
+    <asp:DetailsView ID="details" runat="server" AutoGenerateRows="False" 
+        onitemupdating="details_ItemUpdating" 
+        onmodechanging="details_ModeChanging" >
+    <Fields>
+    
+        <asp:TemplateField HeaderText="Name">
+            <EditItemTemplate>
+                <asp:TextBox ID="TextBoxeditname" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
+            </EditItemTemplate>
+            <InsertItemTemplate>
+                <asp:TextBox ID="TextBoxinsertname" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
+            </InsertItemTemplate>
+            <ItemTemplate>
+                <asp:Label ID="Labelname" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField HeaderText="Username">
+            <EditItemTemplate>
+                <asp:TextBox ID="TextBoxedituser" runat="server" Text='<%# Bind("Username") %>'></asp:TextBox>
+            </EditItemTemplate>
+            <InsertItemTemplate>
+                <asp:TextBox ID="TextBoxinsertuser" runat="server" Text='<%# Bind("Username") %>'></asp:TextBox>
+            </InsertItemTemplate>
+            <ItemTemplate>
+                <asp:Label ID="Labeluser" runat="server" Text='<%# Bind("Username") %>'></asp:Label>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField HeaderText="City">
+            <EditItemTemplate>
+                <asp:TextBox ID="TextBoxeditcity" runat="server" Text='<%# Bind("City") %>'></asp:TextBox>
+            </EditItemTemplate>
+            <InsertItemTemplate>
+                <asp:TextBox ID="TextBoxinsertcity" runat="server" Text='<%# Bind("City") %>'></asp:TextBox>
+            </InsertItemTemplate>
+            <ItemTemplate>
+                <asp:Label ID="Labelcity" runat="server" Text='<%# Bind("City") %>'></asp:Label>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField HeaderText="State">
+            <EditItemTemplate>
+                <asp:TextBox ID="TextBoxeditstate" runat="server" Text='<%# Bind("State") %>'></asp:TextBox>
+            </EditItemTemplate>
+            <InsertItemTemplate>
+                <asp:TextBox ID="TextBoxinsertstate" runat="server" Text='<%# Bind("State") %>'></asp:TextBox>
+            </InsertItemTemplate>
+            <ItemTemplate>
+                <asp:Label ID="Labelstate" runat="server" Text='<%# Bind("State") %>'></asp:Label>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField HeaderText="Telephone">
+            <EditItemTemplate>
+                <asp:TextBox ID="TextBoxeditphone" runat="server" Text='<%# Bind("Telephone") %>'></asp:TextBox>
+            </EditItemTemplate>
+            <InsertItemTemplate>
+                <asp:TextBox ID="TextBoxinsertphone" runat="server" Text='<%# Bind("Telephone") %>'></asp:TextBox>
+            </InsertItemTemplate>
+            <ItemTemplate>
+                <asp:Label ID="Labelphone" runat="server" Text='<%# Bind("Telephone") %>'></asp:Label>
+            </ItemTemplate>
+        </asp:TemplateField>
+       
+        <asp:CommandField ShowEditButton="true" />
+    </Fields>
+    </asp:DetailsView>
+
+</asp:Content>

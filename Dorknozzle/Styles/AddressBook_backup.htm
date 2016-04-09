@@ -1,0 +1,132 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
+
+namespace Dorknozzle
+{
+    public partial class AddressBook : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                BindGrid();
+            }
+        }
+
+        private void BindGrid()
+        {
+            SqlConnection conn;
+            SqlCommand comm;
+            SqlDataReader reader;
+            conn = new SqlConnection("Server=localhost\\SqlExpress; Database=Dorknozzle; Integrated Security=True");
+            string command = "Select EmployeeID, Name, Username, Telephone, City, State, Department from Employees";
+            comm = new SqlCommand(command, conn);
+            try
+            {
+                conn.Open();
+                reader = comm.ExecuteReader();
+                grid.DataSource = reader;
+                grid.DataKeyNames = new string[] { "EmployeeID" };
+                grid.DataBind();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        protected void grid_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int rowindex;
+            rowindex = grid.SelectedIndex;
+            GridViewRow row = grid.Rows[rowindex];
+            string name = row.Cells[0].Text;
+            detailsLabel.Text = "You selected " + name;
+            BindDetails();
+        }
+
+
+        private void BindDetails()
+        {
+            int rowindex;
+            rowindex = grid.SelectedIndex;
+            int employeeid = (int)grid.DataKeys[rowindex].Value;
+
+
+            SqlConnection conn;
+            SqlCommand comm;
+            SqlDataReader reader;
+            conn = new SqlConnection("Server=localhost\\SqlExpress; Database=Dorknozzle; Integrated Security=True");
+            string command = "Select EmployeeID, Name, Username, Telephone, City, State, Department from Employees where EmployeeID=@EmployeeID";
+            comm = new SqlCommand(command, conn);
+            comm.Parameters.AddWithValue("@EmployeeID", employeeid);
+            try
+            {
+                conn.Open();
+                reader = comm.ExecuteReader();
+                details.DataSource = reader;
+                details.DataKeyNames = new string[] { "EmployeeID" };
+                details.DataBind();
+                reader.Close();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        protected void details_ItemUpdating(object sender, DetailsViewUpdateEventArgs e)
+        {
+            int employeeid = (int)details.DataKey.Value;
+            SqlConnection conn;
+            SqlCommand comm;
+            TextBox newName = (TextBox)details.FindControl("TextBoxeditname");
+            TextBox newUsername = (TextBox)details.FindControl("TextBoxedituser");
+            TextBox newCity = (TextBox)details.FindControl("TextBoxeditcity");
+            TextBox newState = (TextBox)details.FindControl("TextBoxeditstate");
+            TextBox newPhone = (TextBox)details.FindControl("TextBoxeditphone");
+            string Namenew = newName.Text;
+            string Usernamenew = newUsername.Text;
+            string Citynew = newCity.Text;
+            string Statenew = newState.Text;
+            string Phonenew = newPhone.Text;
+            conn = new SqlConnection("Server=localhost\\SqlExpress; Database=Dorknozzle; Integrated Security=True");
+            comm = new SqlCommand("UpdateEmployeeDetails", conn);
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@Name", Namenew);
+            comm.Parameters.AddWithValue("@City", Citynew);
+            comm.Parameters.AddWithValue("@Username", Usernamenew);
+            comm.Parameters.AddWithValue("@State", Statenew);
+            comm.Parameters.AddWithValue("@Telephone", Phonenew);
+            comm.Parameters.AddWithValue("@EmployeeID", employeeid);
+         
+            
+            try
+            {
+                conn.Open();
+                comm.ExecuteNonQuery();
+            }
+            finally
+            {
+                conn.Close();
+            }
+            details.ChangeMode(DetailsViewMode.ReadOnly);
+            BindGrid();
+            BindDetails();
+        }
+
+        protected void details_ModeChanging(object sender, DetailsViewModeEventArgs e)
+        {
+            details.ChangeMode(e.NewMode);
+            BindDetails();
+        }
+
+       
+    }
+}

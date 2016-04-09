@@ -1,0 +1,10 @@
+D:\C# Window Form\Dorknozzle\Dorknozzle\bin\Dorknozzle.dll
+D:\C# Window Form\Dorknozzle\Dorknozzle\bin\Dorknozzle.pdb
+D:\C# Window Form\Dorknozzle\Dorknozzle\obj\Debug\Dorknozzle.dll
+D:\C# Window Form\Dorknozzle\Dorknozzle\obj\Debug\Dorknozzle.pdb
+D:\C# Window Form\Dorknozzle\Dorknozzle\obj\Debug\Dorknozzle.csprojResolveAssemblyReference.cache
+C:\Users\le\Documents\Visual Studio 2010\Projects\Dorknozzle\Dorknozzle\bin\Dorknozzle.dll
+C:\Users\le\Documents\Visual Studio 2010\Projects\Dorknozzle\Dorknozzle\bin\Dorknozzle.pdb
+C:\Users\le\Documents\Visual Studio 2010\Projects\Dorknozzle\Dorknozzle\obj\Debug\Dorknozzle.csprojResolveAssemblyReference.cache
+C:\Users\le\Documents\Visual Studio 2010\Projects\Dorknozzle\Dorknozzle\obj\Debug\Dorknozzle.dll
+C:\Users\le\Documents\Visual Studio 2010\Projects\Dorknozzle\Dorknozzle\obj\Debug\Dorknozzle.pdb

@@ -1,0 +1,44 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Dorknozzle.master.cs" Inherits="Dorknozzle.Dorknozzle" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="Stylesheet"" type="text/css" href="App_Themes/Blue/Dorknozzle.css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    
+        <!--Header-->
+        <div class="Header">
+            <asp:ScriptManager ID="DorknozzleScriptManager" runat="server">
+            </asp:ScriptManager>
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/header.gif" Height="174px" Width="450px" 
+            AlternateText="The  Official Dorknozzle Company Intranet"/>
+        </div>
+        <!--Menu-->
+        <div class="Menu">
+       
+            <asp:SiteMapDataSource runat="server" ID="dorknozzleSiteMap" ShowStartingNode="false" /> 
+            <!-- The coding line above is linked to Web.sitemap. The coding line below is linked
+            to the coding line above-->
+
+            <asp:Menu ID="dorknozzMenu" runat="server" DataSourceID="dorknozzleSiteMap">
+            <StaticItemTemplate>
+            <img src="Images/book_closed.gif" alt="+" width="16" height="16" style="border-width:0;"/>
+            <%#Eval("Text") %>
+            </StaticItemTemplate>
+            </asp:Menu>
+            </div>
+            <!-- Content-->
+
+            <div class="Content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHoder1" runat="server" />
+            </div>
+           
+    </form>
+</body>
+</html>
